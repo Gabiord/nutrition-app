@@ -6,10 +6,10 @@ import {
   View,
   Image,
   TextInput,
-  Button,
-  FlatList
+  FlatList,
+  Pressable
 } from "react-native";
-import CustomModal from "./components/CustomModal";
+import CustomModal from "./src/components/CustomModal";
 
 
 export default function App() {
@@ -24,10 +24,12 @@ export default function App() {
   };
 
   const addItemToList = () => {
-    setItemId(itemId + 1);
-    const newItem = { id: itemId, nombre: textItem };
-    setItemList((prevState) => [...prevState, newItem]);
-    setTextItem("");
+    if(textItem){
+      setItemId(itemId + 1);
+      const newItem = { id: itemId, nombre: textItem };
+      setItemList((prevState) => [...prevState, newItem]);
+      setTextItem("")
+    }
   };
 
   const selectItemToDelete = (id) => {
@@ -45,28 +47,30 @@ export default function App() {
   const renderItemView = ({ item }) => (
     <View style={styles.itemList}>
       <Text>{item.nombre}</Text>
-      <Button
-        title="x"
-        color="#E21010"
-        accessibilityLabel="eliminar"
-        onPress={() => selectItemToDelete(item.id)}
-      />
+      <Pressable style={styles.buttonX}
+        onPress={() => selectItemToDelete(item.id)}>
+          <Text style={styles.buttonXText}>X</Text> 
+      </Pressable>
     </View>
   );
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container}> 
 
       <View style={styles.tituloContainer}>
-        <Text>Escribe la lista de Alimentos:</Text>
+        <Text>Hola Gabriela</Text>
+        <Text>Que comemos hoy?</Text>
       </View>
+
       <View style={styles.addContainer}>
         <TextInput
           style={styles.addText}
-          defaultValue=""
+          value={textItem}
           onChangeText={onChangeTextHandler}
         />
-        <Button title="Add" color="#4CAF50" onPress={addItemToList} />
+        <Pressable style={styles.buttonAdd} onPress={addItemToList}>
+          <Text style={styles.buttonAddText}>ADD</Text>
+        </Pressable>
       </View>
       <View style={styles.addContainer}>
         <FlatList data={itemList} renderItem={renderItemView} />
@@ -85,9 +89,9 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
+  
   container: {
     flex: 1,
-    backgroundColor: "#ffffff",
     alignItems: "center",
     justifyContent: "top",
     paddingTop: 30,
@@ -104,8 +108,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   tituloContainer: {
-    height: 60,
+    height: 52,
+    width: 195, 
+    marginTop:6,
   },
+
   listContainer: {
     width: 300,
     height: 30,
@@ -115,6 +122,37 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     marginBottom: 10,
-  }
-
+  },
+  buttonAdd:{
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingVertical: 12,
+      paddingHorizontal: 32,
+      borderRadius: 4,
+      elevation: 3,
+      backgroundColor: 'black',
+    },
+  buttonAddText: {
+    fontSize: 16,
+    lineHeight: 21,
+    fontWeight: 'bold',
+    letterSpacing: 0.25,
+    color: 'white',
+  },
+  buttonX:{
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 12,
+    paddingHorizontal: 32,
+    borderRadius: 4,
+    elevation: 3,
+    backgroundColor: 'red',
+  },
+  buttonXText: {
+    fontSize: 16,
+    lineHeight: 21,
+    fontWeight: 'bold',
+    letterSpacing: 0.25,
+    color: 'white',
+}
 });

@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, Button, Modal } from "react-native";
+import { Text, View, StyleSheet, Button, Modal, Pressable } from "react-native";
 
 const CustomModal = (
     {animationTypeProp,
@@ -18,16 +18,19 @@ const CustomModal = (
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
               <Text style={styles.modalText}>Desea eliminar?</Text>
-              <Button
-                title="Cancelar"
+              <Pressable
                 style={[styles.button, styles.buttonClose]}
                 onPress={() => setModalVisibleEvent(!isVisibleProp)}
-              />
-              <Button
-                title="Eliminar"
+              >
+                  <Text>Cancelar</Text>
+               </Pressable> 
+              <Pressable
                 style={[styles.button, styles.buttonClose]}
                 onPress={onDeleteItemHandler}
-              />
+              >
+                <Text>Eliminar</Text>
+              </Pressable>
+
             </View>
           </View>
         </Modal>
