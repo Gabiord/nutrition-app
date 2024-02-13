@@ -1,27 +1,62 @@
-import { StyleSheet, Text, View, TextInput } from 'react-native'
-import React from 'react'
-import CardList from '../components/CardList'
-import Card from '../components/Card'
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Pressable,
+  Image,
+} from "react-native";
+import React, { useState } from "react";
+import CardList from "../components/CardList";
+import IconsAssets from "../assets/icons/IconsAssets";
+import FilterModal from "../components/FilterModal";
 
 const Home = () => {
-  return (
-    <View>
-      <Text>Buscar Receta</Text>
-      <TextInput style={styles.TextInput}></TextInput>
-      <CardList/>
-    </View>
-  )
-}
+  const [textInput, setTextInput] = useState("");
+  const [modalVisible, setModalVisible] = useState(false);
+  const [category, setCategory] = useState('');
 
-export default Home
+  const onPressCategory = (prop) => {
+    setCategory(prop)
+    setModalVisible(false)
+  }
+
+
+  return (
+    <View style={styles.container}>
+      <FilterModal modalVisible={modalVisible} onPressCategory={onPressCategory} />
+      <Text>Buscar Receta</Text>
+      <View style={styles.searchBar}>
+        <TextInput style={styles.TextInput}></TextInput>
+        <Pressable onPress={() => setModalVisible(!modalVisible)}>
+          <Image style={styles.image} source={IconsAssets.filter} />
+        </Pressable>
+      </View>
+      <CardList category={category}/>
+    </View>
+  );
+};
+
+export default Home;
 
 const styles = StyleSheet.create({
-  TextInput:{
-    width:"70%",
+  container:{
+
+  },
+  TextInput: {
+    width: 255,
     height: 40,
-    margin: 12,
     borderWidth: 1,
-    padding: 10,
-    borderRadius: 15
-  }
-})
+    borderRadius: 15,
+    borderColor: "#D9D9D9",
+    marginRight: 17,
+  },
+  image: {
+    width: 40,
+    height: 40,
+  },
+  searchBar: {
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+});

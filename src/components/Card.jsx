@@ -3,13 +3,11 @@ import {
   Text,
   View,
   ImageBackground,
-  LinearGradient,
 } from "react-native";
 import React from "react";
 
 const Card = ({ item }) => {
   return (
-    
     <ImageBackground
       source={item.image}
       resizeMode="cover"

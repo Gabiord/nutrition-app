@@ -2,7 +2,7 @@ import { FlatList, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import Card from "./Card";
 
-const CardList = () => {
+const CardList = (category) => {
   const dataRecetas = [
     {
       name: "Arroz con pollo",
@@ -11,6 +11,7 @@ const CardList = () => {
       image: {
         uri: "https://cloudfront-us-east-1.images.arcpublishing.com/elespectador/LDRLW34JWNAPHDQ6I7KOOUJVKI.jpg",
       },
+      category: "Almuerzo",
     },
     {
       name: "Lomo saltado",
@@ -19,6 +20,7 @@ const CardList = () => {
       image: {
         uri: "https://www.washingtonpost.com/wp-apps/imrs.php?src=https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/HP647TGBTUI6ZGYKHCUYHIXNZM.jpg",
       },
+      category: "Cena",
     },
     {
       name: "Tallarines verdes",
@@ -27,6 +29,7 @@ const CardList = () => {
       image: {
         uri: "https://i.pinimg.com/736x/91/e1/29/91e12992932aa18e165acd7aa0e99e75.jpg",
       },
+      category: "Vegetariano",
     },
     {
       name: "Seco de cordero",
@@ -35,6 +38,7 @@ const CardList = () => {
       image: {
         uri: "https://www.comedera.com/wp-content/uploads/2021/07/seco-de-cordero.jpg",
       },
+      category: "Cena",
     },
     {
       name: "Ceviche de pescado",
@@ -43,6 +47,7 @@ const CardList = () => {
       image: {
         uri: "https://messinthekitchen.com/wp-content/uploads/2021/06/ceviche-de-pescado-2.jpg",
       },
+      category: "Almuerzo",
     },
     {
       name: "Milanesa de pollo",
@@ -51,6 +56,7 @@ const CardList = () => {
       image: {
         uri: "https://wildfork.mx/cdn/shop/articles/03_Milanesa_de_Pollo_con_Papas_Fritas.jpg?v=1614571982",
       },
+      category: "Almuerzo",
     },
     {
       name: "Sopa de lentejas",
@@ -59,6 +65,7 @@ const CardList = () => {
       image: {
         uri: "https://www.justspices.es/media/recipe/sopa-de-lentejas.jpg",
       },
+      category: "Vegetariano",
     },
     {
       name: "Papa a la huancaina",
@@ -67,6 +74,7 @@ const CardList = () => {
       image: {
         uri: "https://cdn.colombia.com/gastronomia/2013/05/17/papas-a-la-huancaina-3387.jpg",
       },
+      category: "Vegetariano",
     },
     {
       name: "Tacos al pastor",
@@ -75,6 +83,7 @@ const CardList = () => {
       image: {
         uri: "https://iamafoodblog.b-cdn.net/wp-content/uploads/2021/05/al-pastor-3507w.jpg",
       },
+      category: "Cena",
     },
     {
       name: "Lasagna de carne",
@@ -83,21 +92,50 @@ const CardList = () => {
       image: {
         uri: "https://www.recetasdesbieta.com/wp-content/uploads/2018/10/lasagna-original..jpg",
       },
+      category: "Almuerzo",
+    },
+    {
+      name: "Muesli casero con fruta",
+      chef: "Miguel Hernandez",
+      rate: "4",
+      image: {
+        uri: "https://www.hogarmania.com/archivos/201309/muesli-platano-yogur-xl-XxXx80.jpg",
+      },
+      category: "Desayuno",
+    },
+    {
+      name: "Tortitas de avena",
+      chef: "Gabriela Ordonez",
+      rate: "4",
+      image: {
+        uri: "https://www.hogarmania.com/archivos/202209/tortitas-avena-faciles-saludables-portada-1280x720x80xX.jpg",
+      },
+      category: "Desayuno",
+    },
+    {
+      name: "Smothie bowl",
+      chef: "Gabriela Ordonez",
+      rate: "5",
+      image: {
+        uri: "https://www.hogarmania.com/archivos/201810/p1080345-copia-2-848x477x80xX.jpg",
+      },
+      category: "Desayuno",
     },
   ];
   const numColumns = 2;
 
-  
+  const filteredData = category.category
+    ? dataRecetas.filter((receta) => receta.category === category.category)
+    : dataRecetas;
+
   return (
     <>
       <Text>Resultados</Text>
       <Text>10 Recetas</Text>
       <View style={styles.container}>
         <FlatList
-          data={dataRecetas}
+          data={filteredData}
           numColumns={numColumns}
-          showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => <Card item={item} />}
         />
       </View>
@@ -108,6 +146,5 @@ const CardList = () => {
 export default CardList;
 
 const styles = StyleSheet.create({
-  container: {
-  },
+  container: {},
 });
