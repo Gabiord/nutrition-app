@@ -8,9 +8,9 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import CardList from "../components/CardList";
-import IconsAssets from "../assets/icons/IconsAssets";
+import IconsAssets from "../../assets/icons/IconsAssets";
 import FilterModal from "../components/FilterModal";
-import { colors } from "../assets/colors";
+import { colors } from "../global/colors";
 
 const Home = () => {
   const [textInput, setTextInput] = useState("");
@@ -22,7 +22,6 @@ const Home = () => {
     setModalVisible(false)
   }
 
-
   return (
     <View style={styles.container}>
       <FilterModal modalVisible={modalVisible} onPressCategory={onPressCategory} />
@@ -33,7 +32,7 @@ const Home = () => {
           <Image style={styles.image} source={IconsAssets.filter} />
         </Pressable>
       </View>
-      <CardList category={category}/>
+      <CardList category={category} textInput={textInput}/>
     </View>
   );
 };
