@@ -5,6 +5,7 @@ import {
   ImageBackground,
 } from "react-native";
 import React from "react";
+import { colors } from "../assets/colors";
 
 const Card = ({ item }) => {
   return (
@@ -33,10 +34,10 @@ const styles = StyleSheet.create({
     margin: 20,
   },
   name: {
-    color: "white",
+    color: colors.white,
     fontWeight: "bold",
   },
   chef: {
-    color: "#A9A9A9",
+    color: colors.gray3,
   },
 });

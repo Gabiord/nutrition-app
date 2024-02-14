@@ -10,6 +10,7 @@ import React, { useState } from "react";
 import CardList from "../components/CardList";
 import IconsAssets from "../assets/icons/IconsAssets";
 import FilterModal from "../components/FilterModal";
+import { colors } from "../assets/colors";
 
 const Home = () => {
   const [textInput, setTextInput] = useState("");
@@ -25,9 +26,9 @@ const Home = () => {
   return (
     <View style={styles.container}>
       <FilterModal modalVisible={modalVisible} onPressCategory={onPressCategory} />
-      <Text>Buscar Receta</Text>
+      <Text>Buscar Recetas</Text>
       <View style={styles.searchBar}>
-        <TextInput style={styles.TextInput}></TextInput>
+        <TextInput style={styles.TextInput} onChangeText={(value)=>setTextInput(value)} placeholder="Buscar por nombre"/>
         <Pressable onPress={() => setModalVisible(!modalVisible)}>
           <Image style={styles.image} source={IconsAssets.filter} />
         </Pressable>
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
     height: 40,
     borderWidth: 1,
     borderRadius: 15,
-    borderColor: "#D9D9D9",
+    borderColor: colors.gray4,
     marginRight: 17,
   },
   image: {
